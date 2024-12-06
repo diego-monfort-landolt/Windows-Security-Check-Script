@@ -1,0 +1,1 @@
+This batch script performs basic security checks on a Windows computer. It verifies if there are any other active users, checks for suspicious processes like cmd.exe and powershell.exe, and identifies unknown user accounts. The script helps in monitoring potential unauthorized access and ensuring the security of your system.
