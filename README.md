@@ -87,7 +87,11 @@ Kopiere die .bat-Datei in den Autostart-Ordner:
 
 
 ///
-UVP
+
+
+UVP Script <--
+
+
 . Überprüfung auf verdächtige Prozesse
 Ein Skript, das nach verdächtigen Prozessen sucht:
 
