@@ -85,6 +85,22 @@ Die Ergebnisse werden im Eingabeaufforderungsfenster angezeigt.
 Automatisches Ausführen beim Start (optional)
 Kopiere die .bat-Datei in den Autostart-Ordner:
 
+
+///
+UVP
+. Überprüfung auf verdächtige Prozesse
+Ein Skript, das nach verdächtigen Prozessen sucht:
+
+batch
+@echo off
+tasklist | findstr /i "cmd.exe powershell.exe"
+if %errorlevel% equ 0 (
+    echo Verdächtige Prozesse gefunden: cmd.exe oder powershell.exe
+) else (
+    echo Keine verdächtigen Prozesse gefunden.
+)
+pause
+
 Drücke Win + R, gib shell:startup ein und drücke Enter.
 
 Kopiere die .bat-Datei in den geöffneten Ordner.
