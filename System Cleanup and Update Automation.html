@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Cleanup and Update</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #message {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="message">
+        <h1>System Cleanup and Update</h1>
+        <p>Das Programm führt eine Systembereinigung und Updates durch.</p>
+        <button onclick="runCleanup()">Start</button>
+    </div>
+    <script>
+        function runCleanup() {
+            const { exec } = require('child_process');
+
+            // Teams Cache löschen
+            exec('rmdir /S /Q "%APPDATA%\\Microsoft\\Teams"', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Fehler: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`Stderr: ${stderr}`);
+                    return;
+                }
+                console.log(`Teams Cache gelöscht: ${stdout}`);
+            });
+
+            // Outlook Cache löschen
+            exec('rmdir /S /Q "%USERPROFILE%\\AppData\\Local\\Microsoft\\Outlook"', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Fehler: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`Stderr: ${stderr}`);
+                    return;
+                }
+                console.log(`Outlook Cache gelöscht: ${stdout}`);
+            });
+
+            // Edge Cache löschen
+            exec('rmdir /S /Q "%USERPROFILE%\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Cache"', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Fehler: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`Stderr: ${stderr}`);
+                    return;
+                }
+                console.log(`Edge Cache gelöscht: ${stdout}`);
+            });
+
+            // Chrome Cache löschen
+            exec('rmdir /S /Q "%USERPROFILE%\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache"', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Fehler: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`Stderr: ${stderr}`);
+                    return;
+                }
+                console.log(`Chrome Cache gelöscht: ${stdout}`);
+            });
+
+            // DNS-Cache leeren
+            exec('ipconfig /flushdns', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Fehler: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`Stderr: ${stderr}`);
+                    return;
+                }
+                console.log(`DNS-Cache geleert: ${stdout}`);
+            });
+
+            // Gruppenrichtlinien aktualisieren
+            exec('gpupdate /force', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Fehler: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`Stderr: ${stderr}`);
+                    return;
+                }
+                console.log(`Gruppenrichtlinien aktualisiert: ${stdout}`);
+            });
+
+            // Windows Update ausführen
+            exec('powershell -Command "Install-Module PSWindowsUpdate -Force; Install-WindowsUpdate -AcceptAll -AutoReboot"', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Fehler: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`Stderr: ${stderr}`);
+                    return;
+                }
+                console.log(`Windows Update ausgeführt: ${stdout}`);
+            });
+
+            // Lokale Daten löschen
+            exec('del /s /q %temp%\\* && del /s /q C:\\Windows\\Temp\\*', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Fehler: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`Stderr: ${stderr}`);
+                    return;
+                }
+                console.log(`Lokale Daten gelöscht: ${stdout}`);
+            });
+
+            document.getElementById('message').innerHTML = '<h1>System Cleanup and Update</h1><p>Der Vorgang wurde abgeschlossen.</p>';
+        }
+    </script>
+</body>
+</html>
